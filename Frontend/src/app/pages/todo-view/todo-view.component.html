@@ -1,55 +1,59 @@
 <div class="centered-content">
-  <div class="task-manager-container">
+    <div class="task-manager-container">
 
-    <div class="sidebar has-background-white">
-      <h1 class="title has-text-primary">
-        Lists
-      </h1>
-      <div class="list-menu">
-        <a href="#" class="list-menu-item is-active">
-          <p>Personal</p>
-        </a>
+        <div class="sidebar has-background-white">
+            <h1 class="title has-text-primary">
+                Lists
+            </h1>
+            <div class="list-menu">
+                <a href="#" class="list-menu-item is-active">
+                    <p>Personal</p>
+                </a>
 
-        <a href="#" class="list-menu-item">
-          <p>Work</p>
-        </a>
+                <a href="#" class="list-menu-item">
+                    <p>Work</p>
+                </a>
 
-        <a href="#" class="list-menu-item">
-          <p>Shopping</p>
-        </a>
+                <a href="#" class="list-menu-item">
+                    <p>Shopping</p>
+                </a>
 
-        <a href="#" class="list-menu-item">
-          <p>Others</p>
-        </a>
-      </div>
+                <a href="#" class="list-menu-item">
+                    <p>Others</p>
+                </a>
+            </div>
+
+            <button class="button is-primary has-text-white" (click)="createNewList()">
+                +New List
+            </button>
+
+        </div>
+
+        <div class="task-list-container has-background-light">
+
+            <h1 class="title has-text-primary">
+                Tasks
+            </h1>
+            <div class="task-type-menu">
+                <a href="#" class="task-menu-item">
+                    <p>New</p>
+                </a>
+
+                <a href="#" class="task-menu-item is-active">
+                    <p>Progress</p>
+                </a>
+
+                <a href="#" class="task-menu-item">
+                    <p>Completed</p>
+                </a>
+            </div>
+
+
+            <div class="task">
+                <p>This is something i have to do</p>
+            </div>
+
+        </div>
 
     </div>
-
-    <div class="task-list-container has-background-light">
-
-        <h1 class="title has-text-primary">
-          Tasks
-        </h1>
-      <div class="task-type-menu">
-        <a href="#" class="task-menu-item">
-          <p>New</p>
-        </a>
-
-        <a href="#" class="task-menu-item is-active">
-          <p>Progress</p>
-        </a>
-
-        <a href="#" class="task-menu-item">
-          <p>Completed</p>
-        </a>
-      </div>
-
-
-      <div class="task">
-        <p>This is something i have to do</p>
-      </div>
-
-    </div>
-
-  </div>
 </div>

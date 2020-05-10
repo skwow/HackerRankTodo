@@ -7,14 +7,20 @@ const bodyParser = require("body-parser")
 app.use(bodyParser.json());
 const {Task, List} = require("./DB/Models")
 
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 //Routes
-app.get("/lists",(req,res)=>{
-    List.find({}).then((lists)=>{
+app.get("/lists", (req, res) => {
+    List.find({}).then((lists) => {
         res.send(lists);
     });
 })
 
-app.post("/lists",(req,res)=>{
+app.post("/lists", (req, res) => {
     let title = req.body.title;
     let newList = new List({
         title
@@ -24,40 +30,40 @@ app.post("/lists",(req,res)=>{
     });
 })
 
-app.patch("/lists/:id",(req,res)=>{
-    List.findOneAndUpdate({_id:req.params.id},{
+app.patch("/lists/:id", (req, res) => {
+    List.findOneAndUpdate({_id: req.params.id}, {
         $set: req.body
-    }).then(()=>{
+    }).then(() => {
         res.sendStatus(200);
     });
 })
 
-app.delete("/lists/:id",(req,res)=>{
+app.delete("/lists/:id", (req, res) => {
     List.findOneAndRemove({
         _id: req.params.id
-    }).then((removedDoc)=>{
+    }).then((removedDoc) => {
         res.send(removedDoc);
     });
 })
 
-app.get("/lists/:listId/tasks",(req,res)=>{
+app.get("/lists/:listId/tasks", (req, res) => {
     Task.find({
         _listId: req.params.listId
-    }).then((tasks)=>{
+    }).then((tasks) => {
         res.send(tasks);
     });
 })
 
-app.get("/lists/:listId/tasks/:taskId",(req,res)=>{
+app.get("/lists/:listId/tasks/:taskId", (req, res) => {
     Task.findOne({
         _listId: req.params.listId,
         _id: req.params.taskId
-    }).then((task)=>{
+    }).then((task) => {
         res.send(task);
     });
 })
 
-app.post("/lists/:listId/tasks",(req,res)=>{
+app.post("/lists/:listId/tasks", (req, res) => {
     console.log(req);
     let newTask = new Task({
         title: req.body.title,
@@ -71,26 +77,26 @@ app.post("/lists/:listId/tasks",(req,res)=>{
     });
 })
 
-app.patch("/lists/:listId/tasks/:taskId",(req,res)=>{
+app.patch("/lists/:listId/tasks/:taskId", (req, res) => {
     Task.findOneAndUpdate({
-        _id:req.params.taskId,
+        _id: req.params.taskId,
         _listId: req.params.listId
     }, {
         $set: req.body
-    }).then(()=>{
+    }).then(() => {
         res.sendStatus(200);
     });
 })
 
-app.delete("/lists/:listId/tasks/:taskId",(req,res)=>{
+app.delete("/lists/:listId/tasks/:taskId", (req, res) => {
     Task.findOneAndRemove({
         _id: req.params.taskId,
         _listId: req.params.listId
-    }).then((removedDoc)=>{
+    }).then((removedDoc) => {
         res.send(removedDoc);
     });
 })
 
-app.listen(3000,()=>{
+app.listen(3000, () => {
     console.log("App is listening on 3000");
 })

@@ -17,12 +17,6 @@ const TaskSchema = new mongoose.Schema({
         minlength: 1,
         trim: true
     },
-    type: {
-        type: String,
-        required: true,
-        minlength: 1,
-        trim: true
-    },
     due:{
         type: Date,
         required: true,

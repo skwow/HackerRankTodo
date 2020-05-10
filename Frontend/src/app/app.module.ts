@@ -7,6 +7,7 @@ import {TodoViewComponent} from './pages/todo-view/todo-view.component';
 import {HttpClientModule} from "@angular/common/http";
 import { NewListComponent } from './pages/new-list/new-list.component';
 import { NewTaskComponent } from './pages/new-task/new-task.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import { NewTaskComponent } from './pages/new-task/new-task.component';
     imports: [
         BrowserModule,
         AppRoutingModule,
-        HttpClientModule
+        HttpClientModule,
+        FormsModule,
     ],
     providers: [],
     bootstrap: [AppComponent]

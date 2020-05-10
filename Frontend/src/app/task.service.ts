@@ -15,6 +15,11 @@ export class TaskService {
         return this.apiService.post('lists', {title});
     }
 
+    createTask(title: string, listId: string, due: string, status: string)
+    {
+        return this.apiService.post(`lists/${listId}/tasks`, {title,status,due});
+    }
+
     getList()
     {
         return this.apiService.get('lists');

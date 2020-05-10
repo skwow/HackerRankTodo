@@ -1,1 +1,33 @@
-<p>new-task works!</p>
+<div class="centered-content">
+    <div class="modal-box">
+        <h1 class="title">
+            Create a new Task
+        </h1>
+
+        <input #taskTitleInput class="input has-background-light is-medium" type="text" placeholder="Enter task name...">
+        <br><br>
+
+        <p>Pick Due Date</p>
+        <input #dueDateInput class="input" type="date" [ngModel]="minDate" min="{{minDate}}" onkeydown="return false" (change)="onDueDateChange(dueDateInput.value)">
+
+        <br><br>
+        <p>Select status</p>
+        <div class="select">
+            <select #typeInput (change)="onTypeChange(typeInput.value)">
+                <option>New</option>
+                <option>Progress</option>
+                <option>Completed</option>
+            </select>
+        </div>
+
+        <br><br>
+        <div class="buttons is-right">
+            <button class="button is-medium" routerLink="/">Cancel</button>
+            <button class="button is-primary has-text-white is-medium" (click)="createTask(taskTitleInput.value)">
+                Create
+            </button>
+        </div>
+
+
+    </div>
+</div>

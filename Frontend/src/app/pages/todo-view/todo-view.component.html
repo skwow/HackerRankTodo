@@ -6,24 +6,12 @@
                 Lists
             </h1>
             <div class="list-menu">
-                <a href="#" class="list-menu-item is-active">
-                    <p>Personal</p>
-                </a>
-
-                <a href="#" class="list-menu-item">
-                    <p>Work</p>
-                </a>
-
-                <a href="#" class="list-menu-item">
-                    <p>Shopping</p>
-                </a>
-
-                <a href="#" class="list-menu-item">
-                    <p>Others</p>
+                <a class="list-menu-item" *ngFor="let list of lists" [routerLink]="['/lists',list._id]" routerLinkActive="is-active">
+                    <p>{{list.title}}</p>
                 </a>
             </div>
 
-            <button class="button is-primary has-text-white" (click)="createNewList()">
+            <button class="button is-primary has-text-white" routerLink="/newList">
                 +New List
             </button>
 
@@ -49,9 +37,13 @@
             </div>
 
 
-            <div class="task">
-                <p>This is something i have to do</p>
+            <div class="task" *ngFor="let task of tasks">
+                <p>{{task.title}}</p>
             </div>
+
+            <button class="circle-add-button button is-primary">
+                <img src="../../../assets/plus-icon.svg" alt="">
+            </button>
 
         </div>
 

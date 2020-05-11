@@ -9,8 +9,8 @@ const routes: Routes = [
     {path: '', redirectTo: '/lists', pathMatch: 'full'},
     {path: "lists", component: TodoViewComponent},
     {path: "newList", component:NewListComponent},
-    {path: "lists/:listId", component:TodoViewComponent},
-    {path: "lists/:listId/newTask", component:NewTaskComponent}
+    {path: "lists/:listId/:status", component:TodoViewComponent},
+    {path: "lists/:listId/:status/newTask", component:NewTaskComponent}
 ];
 
 @NgModule({

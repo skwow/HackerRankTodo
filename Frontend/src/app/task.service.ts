@@ -26,9 +26,9 @@ export class TaskService {
         return this.apiService.get('lists');
     }
 
-    getTasks(listId: string)
+    getTasks(listId: string, _status: string)
     {
-        return this.apiService.get(`lists/${listId}/tasks`);
+        return this.apiService.get(`lists/${listId}/tasks/${_status}`);
     }
 
     complete(task:Task, _status:string)

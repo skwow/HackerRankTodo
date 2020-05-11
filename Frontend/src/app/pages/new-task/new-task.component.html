@@ -4,19 +4,19 @@
             Create a new Task
         </h1>
 
-        <input #taskTitleInput class="input has-background-light is-medium" type="text" placeholder="Enter task name...">
+        <input #taskTitleInput class="input has-background-light is-medium styledText" type="text" placeholder="Enter task name...">
         <br><br>
 
-        <p>Pick Due Date</p>
-        <input #dueDateInput class="input" type="date" [ngModel]="minDate" min="{{minDate}}" onkeydown="return false" (change)="onDueDateChange(dueDateInput.value)">
+        <p class="styledText">Pick Due Date</p>
+        <input #dueDateInput class="input styledText" type="date" [ngModel]="minDate" min="{{minDate}}" onkeydown="return false" (change)="onDueDateChange(dueDateInput.value)">
 
         <br><br>
-        <p>Select status</p>
-        <div class="select">
-            <select #typeInput (change)="onTypeChange(typeInput.value)">
-                <option>New</option>
-                <option>Progress</option>
-                <option>Completed</option>
+        <p class="styledText">Select status</p>
+        <div class="select styledText">
+            <select class="styledText" #typeInput (change)="onTypeChange(typeInput.value)">
+                <option class="styledText">New</option>
+                <option class="styledText">Progress</option>
+                <option class="styledText">Completed</option>
             </select>
         </div>
 

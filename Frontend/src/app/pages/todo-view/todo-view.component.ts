@@ -13,14 +13,18 @@ export class TodoViewComponent implements OnInit {
 
     lists: List[];
     tasks: Task[];
+    activeListId: string;
+    taskStatus: string;
     constructor(private api: TaskService, private route: ActivatedRoute) {
     }
 
     ngOnInit(): void {
         this.route.params.subscribe((params: Params) =>
         {
-            console.log(params);
-            this.api.getTasks(params.listId).subscribe((tasks:Task[])=>{
+            // console.log(this.activeListId);
+            this.activeListId = params.listId;
+            this.taskStatus = params.status;
+            this.api.getTasks(params.listId, params.status).subscribe((tasks:Task[])=>{
                 this.tasks = tasks;
             });
         })

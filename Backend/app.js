@@ -55,6 +55,33 @@ app.get("/lists/:listId/tasks", (req, res) => {
     });
 })
 
+app.get("/lists/:listId/tasks/new", (req, res) => {
+    Task.find({
+        _listId: req.params.listId,
+        status: "New"
+    }).then((tasks) => {
+        res.send(tasks);
+    });
+})
+
+app.get("/lists/:listId/tasks/progress", (req, res) => {
+    Task.find({
+        _listId: req.params.listId,
+        status: "Progress"
+    }).then((tasks) => {
+        res.send(tasks);
+    });
+})
+
+app.get("/lists/:listId/tasks/completed", (req, res) => {
+    Task.find({
+        _listId: req.params.listId,
+        status: "Completed"
+    }).then((tasks) => {
+        res.send(tasks);
+    });
+})
+
 app.get("/lists/:listId/tasks/:taskId", (req, res) => {
     Task.findOne({
         _listId: req.params.listId,

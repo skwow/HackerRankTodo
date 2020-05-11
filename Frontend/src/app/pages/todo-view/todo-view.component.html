@@ -6,12 +6,12 @@
                 Lists
             </h1>
             <div class="list-menu">
-                <a class="list-menu-item" *ngFor="let list of lists" [routerLink]="['/lists',list._id]" routerLinkActive="is-active">
+                <a class="list-menu-item" *ngFor="let list of lists" [routerLink]="['/lists',list._id, 'progress']" [ngClass]="{'is-active': activeListId==list._id}">
                     <p>{{list.title}}</p>
                 </a>
             </div>
 
-            <button class="button is-primary has-text-white" routerLink="/newList">
+            <button class="button is-primary has-text-white styledText" routerLink="/newList" >
                 +New List
             </button>
 
@@ -22,16 +22,16 @@
             <h1 class="title has-text-primary">
                 Tasks
             </h1>
-            <div class="task-type-menu">
-                <a href="#" class="task-menu-item">
+            <div class="task-type-menu" >
+                <a class="task-menu-item" [routerLink]="['/lists',activeListId,'new']" [ngClass]="{'is-active': taskStatus=='new', 'linkDisabled':activeListId === undefined }">
                     <p>New</p>
                 </a>
 
-                <a href="#" class="task-menu-item is-active">
+                <a class="task-menu-item" [routerLink]="['/lists',activeListId,'progress']" [ngClass]="{'is-active': taskStatus=='progress', 'linkDisabled':activeListId === undefined }" >
                     <p>Progress</p>
                 </a>
 
-                <a href="#" class="task-menu-item">
+                <a class="task-menu-item" [routerLink]="['/lists',activeListId,'completed']" [ngClass]="{'is-active': taskStatus=='completed', 'linkDisabled':activeListId === undefined }">
                     <p>Completed</p>
                 </a>
             </div>
@@ -41,7 +41,7 @@
                 <p>{{task.title}}</p>
             </div>
 
-            <button routerLink="./newTask" class="circle-add-button button is-primary">
+            <button routerLink="./newTask" class="circle-add-button button is-primary" [disabled]="activeListId === undefined">
                 <img src="../../../assets/plus-icon.svg" class="has-text-white">
             </button>
 

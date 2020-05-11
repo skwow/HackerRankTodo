@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {TaskService} from "../../task.service";
 import {ActivatedRoute, Params} from "@angular/router";
+import {Task} from "../../models/task.model";
+import {List} from "../../models/list.model";
 
 @Component({
     selector: 'app-todo-view',
@@ -9,8 +11,8 @@ import {ActivatedRoute, Params} from "@angular/router";
 })
 export class TodoViewComponent implements OnInit {
 
-    lists: any[];
-    tasks: any[];
+    lists: List[];
+    tasks: Task[];
     constructor(private api: TaskService, private route: ActivatedRoute) {
     }
 
@@ -18,20 +20,21 @@ export class TodoViewComponent implements OnInit {
         this.route.params.subscribe((params: Params) =>
         {
             console.log(params);
-            this.api.getTasks(params.listId).subscribe((tasks:any[])=>{
+            this.api.getTasks(params.listId).subscribe((tasks:Task[])=>{
                 this.tasks = tasks;
             });
         })
 
-        this.api.getList().subscribe((lists: any[]) => {
+        this.api.getList().subscribe((lists: List[]) => {
             this.lists = lists;
         })
     }
 
-    createNewList() {
-        this.api.createList("testing").subscribe((response) => {
-            console.log(response);
+
+    onTaskStatusChange(task: Task, _status: string)
+    {
+        this.api.complete(task, _status).subscribe(()=>{
+            // console.log("Completed")
         });
     }
-
 }

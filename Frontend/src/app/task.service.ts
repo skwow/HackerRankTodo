@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {WebRequestService} from "./web-request.service";
+import {Task} from "./models/task.model"
 
 @Injectable({
     providedIn: 'root'
@@ -28,5 +29,13 @@ export class TaskService {
     getTasks(listId: string)
     {
         return this.apiService.get(`lists/${listId}/tasks`);
+    }
+
+    complete(task:Task, _status:string)
+    {
+        return this.apiService.patch(`lists/${task._listId}/tasks/${task._id}`,
+            {
+                status: _status
+            });
     }
 }

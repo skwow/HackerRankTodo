@@ -12,14 +12,38 @@ const UserSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        minlength: 1,
+        minlength: 5,
         trim: true,
         unique: true
     },
     password: {
         type: String,
         required: true,
-        minlength: 8
+        minlength: 6
+    },
+    fullName: {
+        type: String,
+        required: true,
+        minlength: 3,
+        trim: true,
+    },
+    type: {
+        type: String,
+        required: false,
+        default: "Self",
+        trim: true,
+    },
+    contact: {
+        type: Number,
+        required: false,
+        trim: true,
+        unique: true,
+    },
+    tickets: {
+        type: Number,
+        required: false,
+        default: 1,
+        trim: true,
     },
     sessions: [{
         token: {
@@ -66,7 +90,6 @@ UserSchema.methods.generateRefreshAuthToken = function () {
             if (!err) {
                 // no error
                 let token = buf.toString('hex');
-
                 return resolve(token);
             }
         })
@@ -75,7 +98,6 @@ UserSchema.methods.generateRefreshAuthToken = function () {
 
 UserSchema.methods.createSession = function () {
     let user = this;
-
     return user.generateRefreshAuthToken().then((refreshToken) => {
         return saveSessionToDatabase(user, refreshToken);
     }).then((refreshToken) => {
@@ -98,11 +120,7 @@ UserSchema.statics.getJWTSecret = () => {
 
 
 UserSchema.statics.findByIdAndToken = function (_id, token) {
-    // finds user by id and token
-    // used in auth middleware (verifySession)
-
     const User = this;
-
     return User.findOne({
         _id,
         'sessions.token': token
@@ -114,7 +132,6 @@ UserSchema.statics.findByCredentials = function (email, password) {
     let User = this;
     return User.findOne({ email }).then((user) => {
         if (!user) return Promise.reject();
-
         return new Promise((resolve, reject) => {
             bcrypt.compare(password, user.password, (err, res) => {
                 if (res) {

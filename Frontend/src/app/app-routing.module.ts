@@ -3,12 +3,14 @@ import {Routes, RouterModule} from '@angular/router';
 import {TodoViewComponent} from "./pages/todo-view/todo-view.component";
 import {NewListComponent} from "./pages/new-list/new-list.component";
 import {NewTaskComponent} from "./pages/new-task/new-task.component";
+import {LoginPageComponent} from "./pages/login-page/login-page.component";
 
 
 const routes: Routes = [
     {path: '', redirectTo: '/lists', pathMatch: 'full'},
     {path: "lists", component: TodoViewComponent},
     {path: "newList", component:NewListComponent},
+    {path: "login", component:LoginPageComponent},
     {path: "lists/:listId/:status", component:TodoViewComponent},
     {path: "lists/:listId/:status/newTask", component:NewTaskComponent}
 ];

@@ -8,13 +8,15 @@ import {HttpClientModule} from "@angular/common/http";
 import { NewListComponent } from './pages/new-list/new-list.component';
 import { NewTaskComponent } from './pages/new-task/new-task.component';
 import {FormsModule} from "@angular/forms";
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         TodoViewComponent,
         NewListComponent,
-        NewTaskComponent
+        NewTaskComponent,
+        LoginPageComponent
     ],
     imports: [
         BrowserModule,

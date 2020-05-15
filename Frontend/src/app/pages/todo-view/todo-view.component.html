@@ -19,26 +19,69 @@
 
         <div class="task-list-container has-background-light">
 
-            <h1 class="title has-text-primary">
-                Tasks
-            </h1>
+            <div class="top-bar">
+                <h1 class="title has-text-primary">
+                    Tasks
+                </h1>
+                <div class="dropdown is-hoverable is-right">
+                    <div class="dropdown-trigger">
+                        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
+                            <span class="icon is-small">
+                              <i class="fas fa-cog" aria-hidden="true"></i>
+                            </span>
+                        </button>
+                    </div>
+                    <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+                        <div class="dropdown-content">
+                            <a [routerLink]="['/editList', activeListId, taskStatus]" class="dropdown-item">
+                                Edit
+                            </a>
+                            <a (click)="onDeleteListClick()" class="dropdown-item has-text-danger">
+                                Delete
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
             <div class="task-type-menu" >
-                <a class="task-menu-item" [routerLink]="['/lists',activeListId,'new']" [ngClass]="{'is-active': taskStatus=='new', 'linkDisabled':activeListId === undefined }">
+                <a class="task-menu-item" [routerLink]="['/lists',activeListId,'New']" [ngClass]="{'is-active': taskStatus=='New', 'linkDisabled':activeListId === undefined }">
                     <p>New</p>
                 </a>
 
-                <a class="task-menu-item" [routerLink]="['/lists',activeListId,'progress']" [ngClass]="{'is-active': taskStatus=='progress', 'linkDisabled':activeListId === undefined }" >
+                <a class="task-menu-item" [routerLink]="['/lists',activeListId,'Progress']" [ngClass]="{'is-active': taskStatus=='Progress', 'linkDisabled':activeListId === undefined }" >
                     <p>Progress</p>
                 </a>
 
-                <a class="task-menu-item" [routerLink]="['/lists',activeListId,'completed']" [ngClass]="{'is-active': taskStatus=='completed', 'linkDisabled':activeListId === undefined }">
+                <a class="task-menu-item" [routerLink]="['/lists',activeListId,'Completed']" [ngClass]="{'is-active': taskStatus=='Completed', 'linkDisabled':activeListId === undefined }">
                     <p>Completed</p>
                 </a>
             </div>
 
 
             <div class="task" *ngFor="let task of tasks">
-                <p>{{task.title}}</p>
+                <div class="task-text">
+                    <p>{{task.title}}</p>
+                </div>
+
+                <div class="task-buttons">
+
+                    <button class="button" [routerLink]="['/lists', activeListId, 'editTask', task._id, taskStatus]">
+                        <div class="icon">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                    </button>
+
+                    <button class="button is-danger" (click)="onDeleteTaskClick(task._id)" style="margin-left: 10px;">
+                        <div class="icon">
+                            <i class="fas fa-trash"></i>
+                        </div>
+                    </button>
+
+                </div>
+
             </div>
 
             <button routerLink="./newTask" class="circle-add-button button is-primary" [disabled]="activeListId === undefined">

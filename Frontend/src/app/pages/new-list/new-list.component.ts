@@ -10,7 +10,7 @@ import {List} from "../../models/list.model";
 })
 export class NewListComponent implements OnInit {
 
-    constructor(private taskService: TaskService, private router: Router) {
+    constructor(private taskService: TaskService, private router: Router,) {
     }
 
     ngOnInit(): void {

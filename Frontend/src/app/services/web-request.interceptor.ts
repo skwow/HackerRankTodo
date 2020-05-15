@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpErrorResponse, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
-import { Observable, throwError, empty} from "rxjs";
+import {Observable, throwError, empty, Subject} from "rxjs";
 import {AuthService} from "./auth.service";
 import {catchError, switchMap, tap} from "rxjs/operators";
 
@@ -10,6 +10,8 @@ import {catchError, switchMap, tap} from "rxjs/operators";
 export class WebRequestInterceptor implements HttpInterceptor {
 
     refreshingAccessToken: boolean;
+    accessTokenRefreshed: Subject<any> = new Subject();
+
     constructor(private auth:AuthService) {
     }
 
@@ -17,7 +19,7 @@ export class WebRequestInterceptor implements HttpInterceptor {
         req = this.addAuthHeader(req);
         return next.handle(req).pipe(
             catchError((error: HttpErrorResponse)=>{
-                if (error.status === 401 && !this.refreshingAccessToken)
+                if (error.status === 401)
                 {
                     return this.refreshAccessToken().pipe(
                         switchMap(()=>{
@@ -25,9 +27,6 @@ export class WebRequestInterceptor implements HttpInterceptor {
                             return next.handle(req);
                         }),
                         catchError((err:any)=>{
-                            console.log("here");
-                            console.log(err);
-                            console.log("here2");
                             this.auth.logout();
                             return empty();
                         })
@@ -41,13 +40,27 @@ export class WebRequestInterceptor implements HttpInterceptor {
 
     refreshAccessToken()
     {
-        this.refreshingAccessToken = true;
-        return this.auth.getNewAccessToken().pipe(
-            tap(()=>{
-                this.refreshingAccessToken = false;
-                console.log("Access token refreshed");
+        if (this.refreshingAccessToken)
+        {
+            return new Observable(observer => {
+                this.accessTokenRefreshed.subscribe(() => {
+                    // this code will run when the access token has been refreshed
+                    observer.next();
+                    observer.complete();
+                })
             })
-        )
+        }
+        else
+        {
+            this.refreshingAccessToken = true;
+            return this.auth.getNewAccessToken().pipe(
+                tap(()=>{
+                    this.refreshingAccessToken = false;
+                    console.log("Access token refreshed");
+                    this.accessTokenRefreshed.next();
+                })
+            )
+        }
     }
 
     addAuthHeader(request: HttpRequest<any>)

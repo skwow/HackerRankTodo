@@ -11,6 +11,8 @@ import {FormsModule} from "@angular/forms";
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import {WebRequestInterceptor} from "./services/web-request.interceptor";
 import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component';
+import { EditListComponent } from './pages/edit-list/edit-list.component';
+import { EditTaskComponent } from './pages/edit-task/edit-task.component';
 
 @NgModule({
     declarations: [
@@ -19,7 +21,9 @@ import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component
         NewListComponent,
         NewTaskComponent,
         LoginPageComponent,
-        SignUpPageComponent
+        SignUpPageComponent,
+        EditListComponent,
+        EditTaskComponent
     ],
     imports: [
         BrowserModule,

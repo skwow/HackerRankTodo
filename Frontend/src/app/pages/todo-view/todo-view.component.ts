@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {TaskService} from "../../services/task.service";
-import {ActivatedRoute, Params} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Task} from "../../models/task.model";
 import {List} from "../../models/list.model";
 
@@ -15,7 +15,7 @@ export class TodoViewComponent implements OnInit {
     tasks: Task[];
     activeListId: string;
     taskStatus: string;
-    constructor(private api: TaskService, private route: ActivatedRoute) {
+    constructor(private api: TaskService, private route: ActivatedRoute, private router:Router) {
     }
 
     ngOnInit(): void {
@@ -46,5 +46,22 @@ export class TodoViewComponent implements OnInit {
         this.api.complete(task, _status).subscribe(()=>{
             // console.log("Completed")
         });
+    }
+
+    onDeleteListClick()
+    {
+        this.api.deleteList(this.activeListId).subscribe((res:any)=>{
+            console.log(res);
+            this.router.navigate(['/lists']);
+        })
+    }
+
+
+    onDeleteTaskClick(id: string)
+    {
+        this.api.deleteTask(this.activeListId, id).subscribe((res: any) => {
+            this.tasks = this.tasks.filter(val => val._id !== id);
+            console.log(res);
+        })
     }
 }

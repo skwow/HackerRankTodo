@@ -28,4 +28,25 @@ export class WebRequestService {
         return this.http.delete(`${this.URL}/${url}`);
     }
 
+    login(email:string, password:string)
+    {
+        return this.http.post(`${this.URL}/users/login`,{
+            email,
+            password
+        },{
+            observe:"response"
+        });
+    }
+
+    signUp(email:string, password:string, fullName:string)
+    {
+        return this.http.post(`${this.URL}/users`,{
+            email,
+            password,
+            fullName
+        },{
+            observe:"response"
+        });
+    }
+
 }

@@ -1,8 +1,16 @@
 <div class="centered-content">
     <div class="white-box">
 
-        <h1 class="title has-text-primary">Login</h1>
+        <h1 class="title has-text-primary">Sign Up</h1>
 
+        <div class="field">
+            <p class="control has-icons-left has-icons-right">
+                <input #fnInput class="input has-background-light styledText" type="text" placeholder="Full Name">
+                <span class="icon is-small is-left">
+          <i class="fas fa-envelope"></i>
+        </span>
+            </p>
+        </div>
         <div class="field">
             <p class="control has-icons-left has-icons-right">
                 <input #emailInput class="input has-background-light styledText" type="email" placeholder="Email">
@@ -21,15 +29,15 @@
         </div>
         <div class="field" style="display: flex; justify-content: flex-end;">
             <p class="control">
-                <button class="button is-success has-text-white styledText" (click)="onLoginButtonClicked(emailInput.value, pwInput.value)">
-                    Login
+                <button class="button is-success has-text-white styledText" (click)="onSignUpButtonClicked(emailInput.value, pwInput.value, fnInput.value)">
+                    Sign Up
                 </button>
             </p>
         </div>
 
         <br>
 
-        <p class="has-text-grey styledText">Not got an account? <a routerLink="/signUp">Sign up</a> now!</p>
+        <p class="has-text-grey styledText">Already got an account? <a routerLink="/login">login</a> now!</p>
 
     </div>
 </div>

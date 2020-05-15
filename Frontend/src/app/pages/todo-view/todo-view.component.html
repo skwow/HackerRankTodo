@@ -6,7 +6,7 @@
                 Lists
             </h1>
             <div class="list-menu">
-                <a class="list-menu-item" *ngFor="let list of lists" [routerLink]="['/lists',list._id, 'progress']" [ngClass]="{'is-active': activeListId==list._id}">
+                <a class="list-menu-item" *ngFor="let list of lists" [routerLink]="['/lists',list._id,taskStatus? taskStatus: 'new']" [ngClass]="{'is-active': activeListId==list._id}">
                     <p>{{list.title}}</p>
                 </a>
             </div>

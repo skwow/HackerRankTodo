@@ -62,7 +62,17 @@ html, body {
     font-family: "Comic Sans MS", serif;
 }
 
-.white-box {
+.white-box-signup {
+    padding: 35px;
+    background: white;
+    border-radius: 5px;
+
+    width: 700px;
+    max-width: 700px;
+
+}
+
+.white-box-login {
     padding: 35px;
     background: white;
     border-radius: 5px;

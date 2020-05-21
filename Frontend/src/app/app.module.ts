@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {NgModule} from '@angular/core';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {TodoViewComponent} from './pages/todo-view/todo-view.component';
@@ -13,6 +13,8 @@ import {WebRequestInterceptor} from "./services/web-request.interceptor";
 import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component';
 import { EditListComponent } from './pages/edit-list/edit-list.component';
 import { EditTaskComponent } from './pages/edit-task/edit-task.component';
+import { ConfirmSignUpComponent } from './pages/confirm-sign-up/confirm-sign-up.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
     declarations: [
@@ -23,13 +25,16 @@ import { EditTaskComponent } from './pages/edit-task/edit-task.component';
         LoginPageComponent,
         SignUpPageComponent,
         EditListComponent,
-        EditTaskComponent
+        EditTaskComponent,
+        ConfirmSignUpComponent
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
         FormsModule,
+        MatDialogModule,
+        BrowserAnimationsModule,
     ],
     providers: [
         {
@@ -38,7 +43,8 @@ import { EditTaskComponent } from './pages/edit-task/edit-task.component';
             multi: true
         }
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents:[ConfirmSignUpComponent]
 })
 export class AppModule {
 }

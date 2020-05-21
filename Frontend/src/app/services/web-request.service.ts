@@ -38,12 +38,15 @@ export class WebRequestService {
         });
     }
 
-    signUp(email:string, password:string, fullName:string)
+    signUp(email:string, password:string, fullName:string, type:string, contact: Number, tickets: Number)
     {
         return this.http.post(`${this.URL}/users`,{
             email,
             password,
-            fullName
+            fullName,
+            type,
+            contact,
+            tickets
         },{
             observe:"response"
         });

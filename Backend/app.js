@@ -56,9 +56,7 @@ let verifySession = (req, res, next) => {
 
         user.sessions.forEach((session) => {
             if (session.token === refreshToken) {
-                // check if the session has expired
                 if (User.hasRefreshTokenExpired(session.expiresAt) === false) {
-                    // refresh token has not expired
                     isSessionValid = true;
                 }
             }

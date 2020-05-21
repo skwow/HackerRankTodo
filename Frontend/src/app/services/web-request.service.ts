@@ -16,6 +16,10 @@ export class WebRequestService {
         return this.http.get(`${this.URL}/${url}`);
     }
 
+    getCurrentUser(){
+        return this.http.get(`${this.URL}/profile`)
+    }
+
     post(url: string, payload: Object) {
         return this.http.post(`${this.URL}/${url}`, payload);
     }
@@ -38,7 +42,7 @@ export class WebRequestService {
         });
     }
 
-    signUp(email:string, password:string, fullName:string, type:string, contact: Number, tickets: Number)
+    signUp(email:string, password:string, fullName:string, type:string, contact: Number, tickets: Number, imgFile:any)
     {
         return this.http.post(`${this.URL}/users`,{
             email,
@@ -46,7 +50,8 @@ export class WebRequestService {
             fullName,
             type,
             contact,
-            tickets
+            tickets,
+            imgFile,
         },{
             observe:"response"
         });

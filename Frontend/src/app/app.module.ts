@@ -15,6 +15,7 @@ import { EditListComponent } from './pages/edit-list/edit-list.component';
 import { EditTaskComponent } from './pages/edit-task/edit-task.component';
 import { ConfirmSignUpComponent } from './pages/confirm-sign-up/confirm-sign-up.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import { MatDialogModule } from '@angular/material/dialog';
         SignUpPageComponent,
         EditListComponent,
         EditTaskComponent,
-        ConfirmSignUpComponent
+        ConfirmSignUpComponent,
+        ProfileComponent
     ],
     imports: [
         BrowserModule,
@@ -44,7 +46,7 @@ import { MatDialogModule } from '@angular/material/dialog';
         }
     ],
     bootstrap: [AppComponent],
-    entryComponents:[ConfirmSignUpComponent]
+    entryComponents:[ConfirmSignUpComponent,ProfileComponent]
 })
 export class AppModule {
 }

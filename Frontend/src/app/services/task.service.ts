@@ -41,14 +41,6 @@ export class TaskService {
         return this.apiService.get(`lists/${listId}/tasks/${_status}`);
     }
 
-    complete(task:Task, _status:string)
-    {
-        return this.apiService.patch(`lists/${task._listId}/tasks/${task._id}`,
-            {
-                status: _status
-            });
-    }
-
     deleteList(id: string)
     {
         return this.apiService.delete(`lists/${id}`);
@@ -57,5 +49,10 @@ export class TaskService {
     deleteTask(listId: string, taskId: string)
     {
         return this.apiService.delete(`lists/${listId}/tasks/${taskId}`);
+    }
+
+    getCurrentUser()
+    {
+        return this.apiService.getCurrentUser();
     }
 }

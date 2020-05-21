@@ -15,10 +15,18 @@
     width: 250px;
     background: white;
 
-    padding: 42px;
+    padding: 30px;
 
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
+
+    .top-bar {
+        display: flex;
+        .title {
+            flex-grow: 1;
+            margin-top: 8px;
+        }
+    }
 }
 
 .task-type-menu {
@@ -47,24 +55,32 @@
     }
 }
 
+.shadowOnHover
+{
+    box-shadow: white;
+    transition: all .2s ease-in-out;
+    &:hover{
+        transform: scale(1.5);
+        box-shadow: #5f5f5f;
+    }
+}
+
 .task-list-container {
     position: relative;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    padding: 42px;
+    padding: 30px;
 
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
 
 
     .top-bar {
-        margin-bottom: 15px;
         display: flex;
-
         .title {
             flex-grow: 1;
-            margin: 0;
+            margin-top: 8px;
         }
     }
 

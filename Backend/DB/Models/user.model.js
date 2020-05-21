@@ -44,6 +44,11 @@ const UserSchema = new mongoose.Schema({
         default: 1,
         trim: true,
     },
+    imgFile:{
+        type: String,
+        required: false,
+        trim: true
+    },
     sessions: [{
         token: {
             type: String,

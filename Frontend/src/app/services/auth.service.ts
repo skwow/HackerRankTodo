@@ -24,8 +24,8 @@ export class AuthService {
     }
 
 
-    signUp(email: string, password: string, fullName:string, type:string , contact:Number, tickets:Number) {
-        return this.webService.signUp(email, password, fullName, type , contact, tickets).pipe(
+    signUp(email: string, password: string, fullName:string, type:string , contact:Number, tickets:Number, imgFile:any) {
+        return this.webService.signUp(email, password, fullName, type , contact, tickets ,imgFile).pipe(
             shareReplay(),
             tap((res: HttpResponse<any>) => {
                 this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));

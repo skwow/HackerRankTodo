@@ -253,6 +253,16 @@ app.post("/users", (req,res)=>{
     })
 })
 
+app.get("/profile",authenticate,(req,res)=>{
+    User.findOne({
+        _id: req.user_id
+    }).then((user) => {
+        res.send(user);
+    }).catch((err)=>{
+        res.send(err);
+    });
+});
+
 app.post('/users/login', (req, res) => {
     let email = req.body.email;
     let password = req.body.password;

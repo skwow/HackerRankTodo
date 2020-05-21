@@ -3,6 +3,8 @@ import {TaskService} from "../../services/task.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Task} from "../../models/task.model";
 import {List} from "../../models/list.model";
+import {HttpResponse} from "@angular/common/http";
+import {DialogService} from "../../services/dialog.service";
 
 @Component({
     selector: 'app-todo-view',
@@ -15,14 +17,23 @@ export class TodoViewComponent implements OnInit {
     tasks: Task[];
     activeListId: string;
     taskStatus: string;
-    constructor(private api: TaskService, private route: ActivatedRoute, private router:Router) {
+    currentUser:any;
+
+    constructor(private api: TaskService, private route: ActivatedRoute, private router:Router,private dialog:DialogService) {
     }
 
-    ngOnInit(): void {
+    ngOnInit(): void {      // todo: bug: runs everytime a list type is clicked.
         this.route.params.subscribe((params: Params) =>
         {
             this.activeListId = params.listId;
             this.taskStatus = params.status;
+            if(this.currentUser === undefined)
+            {
+                this.api.getCurrentUser().subscribe((user:any)=>{
+                    this.currentUser = user;
+                    console.log(this.currentUser);
+                })
+            }
             if(params.listId)
             {
                 this.api.getTasks(params.listId, params.status).subscribe((tasks:Task[])=>{
@@ -40,14 +51,6 @@ export class TodoViewComponent implements OnInit {
         })
     }
 
-
-    onTaskStatusChange(task: Task, _status: string)
-    {
-        this.api.complete(task, _status).subscribe(()=>{
-            // console.log("Completed")
-        });
-    }
-
     onDeleteListClick()
     {
         this.api.deleteList(this.activeListId).subscribe((res:any)=>{
@@ -63,5 +66,11 @@ export class TodoViewComponent implements OnInit {
             this.tasks = this.tasks.filter(val => val._id !== id);
             console.log(res);
         })
+    }
+
+    showProfile() {
+        this.dialog.viewProfileDialog(this.currentUser).afterClosed().subscribe((confirmed)=>{
+            // may come handy in future.
+        });
     }
 }

@@ -10,8 +10,7 @@ import {DialogService} from "../../services/dialog.service";
     styleUrls: ['./sign-up-page.component.scss']
 })
 export class SignUpPageComponent implements OnInit {
-    private imagePath: string;
-    private imgURL: any;
+    private image: string;
 
     constructor(private auth:AuthService, private router:Router,private dialog:DialogService) {
     }
@@ -19,20 +18,22 @@ export class SignUpPageComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    onSignUpButtonClicked(email: string, password: string, fullName: string, type:string, tickets:Number, contact:Number)
+    onSignUpButtonClicked(email: string, password: string, fullName: string, type:string, _tickets:string, _contact:string)
     {
+        let tickets = parseInt(_tickets);
+        let contact = parseInt(_contact);
         let user = {
             email: email,
             fullName: fullName,
             type: type,
             tickets: tickets,
             contact: contact,
-            imageUrl: this.imgURL
+            imageUrl: this.image
         };
         this.dialog.confirmSignUpDialog(user).afterClosed().subscribe((confirmed)=>{
             if(confirmed)
             {
-                this.auth.signUp(email,password, fullName, type, contact,tickets).subscribe((res: HttpResponse<any>) =>
+                this.auth.signUp(email,password, fullName, type, contact,tickets, this.image).subscribe((res: HttpResponse<any>) =>
                 {
                     if (res.status === 200) {
                         this.router.navigate(['/lists']);
@@ -53,13 +54,10 @@ export class SignUpPageComponent implements OnInit {
             console.log("Only images are supported.");  // todo: show notification
             return;
         }
-
         let reader = new FileReader();
-        this.imagePath = files;
         reader.readAsDataURL(files[0]);
         reader.onload = (_event) => {
-            this.imgURL = reader.result;
-            console.log(this.imagePath,this.imgURL);
+            this.image = reader.result as string ;
         }
     }
 }

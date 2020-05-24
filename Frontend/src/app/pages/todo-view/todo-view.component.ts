@@ -5,6 +5,7 @@ import {Task} from "../../models/task.model";
 import {List} from "../../models/list.model";
 import {HttpResponse} from "@angular/common/http";
 import {DialogService} from "../../services/dialog.service";
+import {NotificationService} from "../../services/notification.service"
 
 @Component({
     selector: 'app-todo-view',
@@ -19,7 +20,7 @@ export class TodoViewComponent implements OnInit {
     taskStatus: string;
     currentUser:any;
 
-    constructor(private api: TaskService, private route: ActivatedRoute, private router:Router,private dialog:DialogService) {
+    constructor(private api: TaskService, private route: ActivatedRoute, private router:Router,private dialog:DialogService, private notificationService: NotificationService) {
     }
 
     ngOnInit(): void {      // todo: bug: runs everytime a list type is clicked.
@@ -56,7 +57,9 @@ export class TodoViewComponent implements OnInit {
         this.api.deleteList(this.activeListId).subscribe((res:any)=>{
             console.log(res);
             this.router.navigate(['/lists']);
-        })
+            this.notificationService.warn("List deleted Successfully!");
+        });
+
     }
 
 

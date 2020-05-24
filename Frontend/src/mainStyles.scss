@@ -88,3 +88,15 @@ html, body {
     color: grey;
     opacity: 50%;
 }
+
+snack-bar-container.successNotification
+{
+    background-color: $light;
+    color:  $primary;
+}
+
+snack-bar-container.warnNotification
+{
+    background-color: $light;
+    color:  orangered;
+}

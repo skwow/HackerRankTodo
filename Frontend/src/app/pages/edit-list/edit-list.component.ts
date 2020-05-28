@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {TaskService} from "../../services/task.service";
+import {NotificationService} from "../../services/notification.service";
 
 @Component({
     selector: 'app-edit-list',
@@ -12,7 +13,7 @@ export class EditListComponent implements OnInit {
     listId: string;
     activeTaskStatus: string;
 
-    constructor(private taskService: TaskService,private route: ActivatedRoute, private router:Router) {
+    constructor(private taskService: TaskService,private route: ActivatedRoute, private router:Router, private notificationService: NotificationService) {
     }
 
     ngOnInit(): void
@@ -28,6 +29,7 @@ export class EditListComponent implements OnInit {
     {
         this.taskService.updateList(this.listId,title).subscribe(()=>{
             this.router.navigate(['/lists',this.listId, this.activeTaskStatus]);
+            this.notificationService.success("List updated!");
         })
     }
 

@@ -73,11 +73,16 @@
             </div>
         </div>
 
-        <div class="field" style="display: flex; justify-content: center">
+        <div class="field" style="display: flex; justify-content: space-between">
 
-            <p class="control">
+            <p class="control" >
+                <button class="button is-danger has-text-white styledText" [mat-dialog-close]="true">
+                    Logout
+                </button>
+            </p>
+            <p class="control"  >
                 <button class="button is-success has-text-white styledText" [mat-dialog-close]="false">
-                    Ok
+                    OK
                 </button>
             </p>
         </div>

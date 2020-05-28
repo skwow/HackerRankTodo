@@ -14,7 +14,6 @@ const UserSchema = new mongoose.Schema({
         required: true,
         minlength: 5,
         trim: true,
-        unique: true
     },
     password: {
         type: String,
@@ -60,6 +59,8 @@ const UserSchema = new mongoose.Schema({
         }
     }]
 });
+
+UserSchema.index({ email: 1 }, { unique: true });
 
 
 // *** Instance methods ***

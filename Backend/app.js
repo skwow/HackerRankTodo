@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const mongoose = require('./DB/mongoHelper');
 const {Task, List, User} = require("./DB/Models");
 const bodyParser = require("body-parser");
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '10mb'}));
 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -249,7 +249,15 @@ app.post("/users", (req,res)=>{
             .header('x-access-token', authTokens.accessToken)
             .send(newUser);
     }).catch((e) => {
-        res.status(400).send(e);
+        if(e.code === 11000)
+        {
+            res.statusMessage = "Duplicate Email";
+            res.status(200).send(e);
+        }
+        else
+        {
+            res.status(400).send(e);
+        }
     })
 })
 
@@ -280,7 +288,8 @@ app.post('/users/login', (req, res) => {
                 .send(user);
         })
     }).catch((e) => {
-        res.status(400).send(e);
+        res.statusMessage = "Wrong credentials!";
+        res.status(200).send(e);
     });
 })
 

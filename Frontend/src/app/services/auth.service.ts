@@ -16,9 +16,15 @@ export class AuthService {
         return this.webService.login(email, password).pipe(
             shareReplay(),
             tap((res: HttpResponse<any>) => {
-                // the auth tokens will be in the header of this response
-                this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
-                console.log("LOGGED IN!");
+                if (res.statusText != "Wrong credentials!")
+                {
+                    this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
+                    console.log("LOGGED IN!");
+                }
+                else
+                {
+                    console.log("NOT LOGGED IN!");
+                }
             })
         )
     }
@@ -27,9 +33,17 @@ export class AuthService {
     signUp(email: string, password: string, fullName:string, type:string , contact:Number, tickets:Number, imgFile:any) {
         return this.webService.signUp(email, password, fullName, type , contact, tickets ,imgFile).pipe(
             shareReplay(),
-            tap((res: HttpResponse<any>) => {
-                this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
-                console.log("Successfully signed up and logged in!");
+            tap((res: HttpResponse<any>) =>
+            {
+                if (res.statusText != "Duplicate Email")
+                {
+                    this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
+                    console.log("Successfully signed up and logged in!");
+                }
+                else
+                {
+                    console.log("Duplicate email");
+                }
             })
         )
     }

@@ -6,7 +6,6 @@ const ListSchema = new mongoose.Schema({
         required: true,
         minlength: 1,
         trim: true,
-        unique: true
     },
     _userId: {
         type: mongoose.Types.ObjectId,
@@ -14,6 +13,7 @@ const ListSchema = new mongoose.Schema({
     }
 
 })
+ListSchema.index({ title: 1, _userId: 1 }, { unique: true });
 
 const List = mongoose.model('List', ListSchema);
 

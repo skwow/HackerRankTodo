@@ -6,6 +6,7 @@ import {List} from "../../models/list.model";
 import {HttpResponse} from "@angular/common/http";
 import {DialogService} from "../../services/dialog.service";
 import {NotificationService} from "../../services/notification.service"
+import {AuthService} from "../../services/auth.service";
 
 @Component({
     selector: 'app-todo-view',
@@ -20,7 +21,7 @@ export class TodoViewComponent implements OnInit {
     taskStatus: string;
     currentUser:any;
 
-    constructor(private api: TaskService, private route: ActivatedRoute, private router:Router,private dialog:DialogService, private notificationService: NotificationService) {
+    constructor(private api: TaskService,private auth:AuthService, private route: ActivatedRoute, private router:Router,private dialog:DialogService, private notificationService: NotificationService) {
     }
 
     ngOnInit(): void {      // todo: bug: runs everytime a list type is clicked.
@@ -59,7 +60,6 @@ export class TodoViewComponent implements OnInit {
             this.router.navigate(['/lists']);
             this.notificationService.warn("List deleted Successfully!");
         });
-
     }
 
 
@@ -67,13 +67,17 @@ export class TodoViewComponent implements OnInit {
     {
         this.api.deleteTask(this.activeListId, id).subscribe((res: any) => {
             this.tasks = this.tasks.filter(val => val._id !== id);
-            console.log(res);
+            this.notificationService.warn("Task deleted Successfully!");
         })
     }
 
     showProfile() {
         this.dialog.viewProfileDialog(this.currentUser).afterClosed().subscribe((confirmed)=>{
-            // may come handy in future.
+            if(confirmed)
+            {
+                this.auth.logout();
+                this.notificationService.success("Logged out Successfully");
+            }
         });
     }
 }

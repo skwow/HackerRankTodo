@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {TaskService} from "../../services/task.service";
 import {Task} from "../../models/task.model";
+import {NotificationService} from "../../services/notification.service";
 
 @Component({
     selector: 'app-edit-task',
@@ -16,7 +17,7 @@ export class EditTaskComponent implements OnInit {
     minDate: string;
 
 
-    constructor(private api: TaskService, private route: ActivatedRoute, private router: Router) {
+    constructor(private api: TaskService, private route: ActivatedRoute, private router: Router, private notificationService: NotificationService) {
     }
 
     ngOnInit(): void {
@@ -36,6 +37,7 @@ export class EditTaskComponent implements OnInit {
     updateTask(title: string) {
         this.api.updateTask(this.listId, this.taskId, title, this.dueDate, this.status).subscribe((newTask: Task)=>{
             this.router.navigate(['/lists', this.listId, this.status]);
+            this.notificationService.success("Task updated!");
         });
     }
 

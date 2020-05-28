@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Task} from "../../models/task.model";
 import {TaskService} from "../../services/task.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
+import {DialogService} from "../../services/dialog.service";
+import {NotificationService} from "../../services/notification.service";
 
 @Component({
     selector: 'app-new-task',
@@ -15,7 +17,7 @@ export class NewTaskComponent implements OnInit {
     minDate: string;
     status: string;
 
-    constructor(private api: TaskService, private route: ActivatedRoute, private router: Router) {}
+    constructor(private api: TaskService, private route: ActivatedRoute, private router: Router, private notificationService: NotificationService) {}
 
 
     ngOnInit(): void
@@ -37,6 +39,7 @@ export class NewTaskComponent implements OnInit {
     createTask(title: string) {
         this.api.createTask(title, this.listId,this.dueDate, this.status).subscribe((newTask: Task)=>{
             this.router.navigate(['../'],{relativeTo: this.route});
+            this.notificationService.success("New Task Created");
         });
 
     }

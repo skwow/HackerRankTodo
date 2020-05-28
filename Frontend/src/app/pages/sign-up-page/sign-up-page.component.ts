@@ -78,7 +78,7 @@ export class SignUpPageComponent implements OnInit {
                     }
                     else if (res.status === 200 && res.statusText === "OK") {
                         this.router.navigate(['/lists']);
-                        this.notificationService.success("Signed Up successfully!");
+                        this.notificationService.success(`Reg.ID: ${res.body._id}`);
                     }
                 });
             }

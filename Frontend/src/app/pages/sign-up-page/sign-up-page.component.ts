@@ -16,8 +16,20 @@ export class SignUpPageComponent implements OnInit {
     constructor(private auth:AuthService, private router:Router,private dialog:DialogService, private notificationService: NotificationService) {
     }
 
-    ngOnInit(): void {
+    ngOnInit(): void
+    {
+        fetch('../../../assets/avatar2.png').then((res)=>{
+            return res.blob();
+        }).then((blob)=>{
+            let reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onload = (_event) => {
+                this.image = reader.result as string ;
+                console.log(this.image);
+            }
+        })
     }
+
 
     lowLevelValidation(email: string, password: string, fullName: string)
     {
@@ -90,3 +102,5 @@ export class SignUpPageComponent implements OnInit {
         }
     }
 }
+
+// todo: make font consistent

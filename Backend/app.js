@@ -97,7 +97,17 @@ app.post("/lists", authenticate,(req, res) => {
     });
     newList.save().then((listDoc) => {
         res.send(listDoc);
-    });
+    }).catch((e)=>{
+        if(e.code === 11000)
+        {
+            res.statusMessage = "Duplicate List";
+            res.status(200).send({});
+        }
+        else
+        {
+            res.status(400).send(e);
+        }
+    })
 })
 
 app.patch("/lists/:id",authenticate, (req, res) => {

@@ -19,10 +19,17 @@ export class NewListComponent implements OnInit {
     }
 
     createList(title: string) {
-        this.taskService.createList(title).subscribe((list: List) => {
-            console.log(list);
-            this.router.navigate(['/lists', list._id, 'progress']);
-            this.notificationService.success("New List Created!");
+        this.taskService.createList(title).subscribe((res: any) => {
+            console.log(res);
+            if(res.status === 200 && res.statusText === "Duplicate List")
+            {
+                this.notificationService.warn("This list already exist!");
+            }
+            else if (res.status === 200 && res.statusText === "OK")
+            {
+                this.router.navigate(['/lists', res.body._id, 'progress']);
+                this.notificationService.success("New List Created!");
+            }
         });
     }
 

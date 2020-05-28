@@ -3,8 +3,8 @@
 
         <h1 class="title has-text-primary">Profile</h1>
         <div style="display: flex; justify-content: center" >
-            <figure class="image is-128x128 ">
-                <img [src]="this.data.user.imgFile" class="is-rounded" *ngIf="this.data.user.imgFile">
+            <figure class="image is-128x128 " >
+                <img [src]="this.data.user.imgFile" class="is-rounded" style="max-width: 100%; max-height: 100%;margin: auto;" *ngIf="this.data.user.imgFile">
             </figure>
         </div>
 

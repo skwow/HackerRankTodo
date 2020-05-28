@@ -46,8 +46,8 @@
                 <h1 class="title has-text-primary">
                     Tasks
                 </h1>
-                <figure class="image is-48x48 shadowOnHover">
-                    <img [src]="this.currentUser.imgFile" class="is-rounded" *ngIf="this.currentUser" (click)="showProfile()">
+                <figure class="image is-48x48 shadowOnHover" >
+                    <img [src]="this.currentUser.imgFile" class="is-rounded" style="max-width: 100%; max-height: 100%;margin: auto;" *ngIf="this.currentUser" (click)="showProfile()">
 
                 </figure>
             </div>

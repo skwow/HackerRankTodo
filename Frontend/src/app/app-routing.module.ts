@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {TodoViewComponent} from "./pages/todo-view/todo-view.component";
-import {NewListComponent} from "./pages/new-list/new-list.component";
-import {NewTaskComponent} from "./pages/new-task/new-task.component";
+import {NewListComponent} from "./dialogs/new-list/new-list.component";
+import {NewTaskComponent} from "./dialogs/new-task/new-task.component";
 import {LoginPageComponent} from "./pages/login-page/login-page.component";
 import {SignUpPageComponent} from "./pages/sign-up-page/sign-up-page.component";
 import {EditListComponent} from "./dialogs/edit-list/edit-list.component";

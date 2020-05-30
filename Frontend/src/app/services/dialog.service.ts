@@ -5,8 +5,8 @@ import {ProfileComponent} from "../dialogs/profile/profile.component";
 import {ViewUserDashboardComponent} from "../dialogs/view-user-dashboard/view-user-dashboard.component";
 import {EditTaskComponent} from "../dialogs/edit-task/edit-task.component";
 import {EditListComponent} from "../dialogs/edit-list/edit-list.component";
-import {NewListComponent} from "../pages/new-list/new-list.component";
-import {NewTaskComponent} from "../pages/new-task/new-task.component";
+import {NewListComponent} from "../dialogs/new-list/new-list.component";
+import {NewTaskComponent} from "../dialogs/new-task/new-task.component";
 
 @Injectable({
     providedIn: 'root'

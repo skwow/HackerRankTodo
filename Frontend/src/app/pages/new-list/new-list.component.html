@@ -4,11 +4,11 @@
             Create a new list
         </h1>
 
-        <input #listTitleInput class="input has-background-light is-medium styledText" type="text" placeholder="Enter list name...">
+        <input #listTitleInput class="input has-background-light is-medium styledText" type="text" placeholder="Enter list name..." (change)="onTitleChange(listTitleInput.value)">
         <br><br>
         <div class="buttons is-right">
-            <button class="button is-medium styledText" routerLink="/">Cancel</button>
-            <button class="button is-primary has-text-white is-medium styledText" (click)="createList(listTitleInput.value)">Create</button>
+            <button class="button is-medium styledText" [mat-dialog-close]="false">Cancel</button>
+            <button class="button is-primary has-text-white is-medium styledText" [mat-dialog-close]="this.title">Create</button>
         </div>
 
 

@@ -11,15 +11,15 @@ import {FormsModule} from "@angular/forms";
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import {WebRequestInterceptor} from "./services/web-request.interceptor";
 import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component';
-import { EditListComponent } from './pages/edit-list/edit-list.component';
-import { EditTaskComponent } from './pages/edit-task/edit-task.component';
-import { ConfirmSignUpComponent } from './pages/confirm-sign-up/confirm-sign-up.component';
+import { EditListComponent } from './dialogs/edit-list/edit-list.component';
+import { EditTaskComponent } from './dialogs/edit-task/edit-task.component';
+import { ConfirmSignUpComponent } from './dialogs/confirm-sign-up/confirm-sign-up.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { ProfileComponent } from './pages/profile/profile.component';
+import { ProfileComponent } from './dialogs/profile/profile.component';
 import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
-import { ViewUserDashboardComponent } from './pages/view-user-dashboard/view-user-dashboard.component';
+import { ViewUserDashboardComponent } from './dialogs/view-user-dashboard/view-user-dashboard.component';
 
 @NgModule({
     declarations: [
@@ -54,7 +54,7 @@ import { ViewUserDashboardComponent } from './pages/view-user-dashboard/view-use
         }
     ],
     bootstrap: [AppComponent],
-    entryComponents:[ConfirmSignUpComponent,ProfileComponent,ViewUserDashboardComponent,EditTaskComponent]
+    entryComponents:[ConfirmSignUpComponent,ProfileComponent,ViewUserDashboardComponent,EditTaskComponent,EditListComponent,NewListComponent,NewTaskComponent]
 })
 export class AppModule {
 }

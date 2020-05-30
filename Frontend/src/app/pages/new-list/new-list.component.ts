@@ -1,9 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {TaskService} from "../../services/task.service";
-import {Router} from "@angular/router";
-import {List} from "../../models/list.model";
-import {DialogService} from "../../services/dialog.service";
-import {NotificationService} from "../../services/notification.service";
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
     selector: 'app-new-list',
@@ -12,25 +8,17 @@ import {NotificationService} from "../../services/notification.service";
 })
 export class NewListComponent implements OnInit {
 
-    constructor(private taskService: TaskService, private router: Router, private notificationService: NotificationService) {
+    title: string;
+
+    constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<NewListComponent>) {
     }
 
     ngOnInit(): void {
     }
 
-    createList(title: string) {
-        this.taskService.createList(title).subscribe((res: any) => {
-            console.log(res);
-            if(res.status === 200 && res.statusText === "Duplicate List")
-            {
-                this.notificationService.warn("This list already exist!");
-            }
-            else if (res.status === 200 && res.statusText === "OK")
-            {
-                this.router.navigate(['/lists', res.body._id, 'progress']);
-                this.notificationService.success("New List Created!");
-            }
-        });
+    onTitleChange(value: string) {
+        this.title = value;
     }
+
 
 }

@@ -4,7 +4,7 @@
             Create a new Task
         </h1>
 
-        <input #taskTitleInput class="input has-background-light is-medium styledText" type="text" placeholder="Enter task name...">
+        <input #taskTitleInput class="input has-background-light is-medium styledText" type="text" placeholder="Enter task name..." (change)="onTitleChange(taskTitleInput.value)">
         <br><br>
 
         <p class="styledText">Pick Due Date</p>
@@ -22,8 +22,8 @@
 
         <br><br>
         <div class="buttons is-right">
-            <button class="button is-medium" routerLink="../">Cancel</button>
-            <button class="button is-primary has-text-white is-medium" (click)="createTask(taskTitleInput.value)">
+            <button class="button is-medium" [mat-dialog-close]="false">Cancel</button>
+            <button class="button is-primary has-text-white is-medium" [mat-dialog-close]="this.task">
                 Create
             </button>
         </div>

@@ -17,7 +17,7 @@
                     </div>
                     <div class="dropdown-menu" id="dropdown-menu4" role="menu">
                         <div class="dropdown-content">
-                            <a [routerLink]="['/editList', activeListId, taskStatus]" class="dropdown-item">
+                            <a (click)="editList()" class="dropdown-item">
                                 Edit
                             </a>
                             <a (click)="onDeleteListClick()" class="dropdown-item has-text-danger">
@@ -34,7 +34,7 @@
                 </a>
             </div>
 
-            <button class="button is-primary has-text-white styledText" routerLink="/newList" >
+            <button class="button is-primary has-text-white styledText" (click)="createList()" >
                 +New List
             </button>
 
@@ -72,7 +72,7 @@
             <div class="task" *ngFor="let task of tasks">
                 <div class="task-text">
                     <p>{{task.title}}</p>
-                    <p style="font-size: 10px;">Due : {{task.due}}</p>
+                    <p style="font-size: 10px;">Due : {{task.dueS}}</p>
                 </div>
 
                 <div class="task-buttons">
@@ -93,7 +93,7 @@
 
             </div>
 
-            <button routerLink="./newTask" class="circle-add-button button is-primary" [disabled]="activeListId === undefined">
+            <button (click)="createTask()" class="circle-add-button button is-primary" [disabled]="activeListId === undefined">
                 <img src="../../../assets/plus-icon.svg" class="has-text-white">
             </button>
 

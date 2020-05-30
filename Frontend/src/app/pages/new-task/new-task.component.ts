@@ -1,9 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Task} from "../../models/task.model";
-import {TaskService} from "../../services/task.service";
-import {ActivatedRoute, Params, Router} from "@angular/router";
-import {DialogService} from "../../services/dialog.service";
-import {NotificationService} from "../../services/notification.service";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
     selector: 'app-new-task',
@@ -12,45 +9,33 @@ import {NotificationService} from "../../services/notification.service";
 })
 export class NewTaskComponent implements OnInit {
 
-    listId: string;
-    dueDate: string;
+    task: any;
     minDate: string;
-    status: string;
 
-    constructor(private api: TaskService, private route: ActivatedRoute, private router: Router, private notificationService: NotificationService) {}
-
+    constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<NewTaskComponent>) {
+    }
 
     ngOnInit(): void
     {
+        this.task = {};
         const now = new Date();
         const day = ("0" + now.getDate()).slice(-2);
         const month = ("0" + (now.getMonth() + 1)).slice(-2);
         this.minDate = now.getFullYear() + "-" + (month) + "-" + (day);
-        this.dueDate = this.minDate;
-        this.status = "New";
-        this.route.params.subscribe((params: Params) =>
-        {
-            this.listId = params["listId"];
-            console.log(this.listId);
-        })
-
-    }
-
-    createTask(title: string) {
-        this.api.createTask(title, this.listId,this.dueDate, this.status).subscribe((newTask: Task)=>{
-            this.router.navigate(['../'],{relativeTo: this.route});
-            this.notificationService.success("New Task Created");
-        });
-
+        this.task.due = now;
+        this.task.status = "New";
     }
 
     onTypeChange(status) {
-        this.status = status;
+        this.task.status = status;
     }
 
     onDueDateChange(dueDate) {
-        dueDate = new Date(dueDate);
-        dueDate.setDate(dueDate.getDate() + 1);
-        this.dueDate = dueDate;
+        this.task.due = dueDate;
+    }
+
+    onTitleChange(title)
+    {
+        this.task.title = title;
     }
 }

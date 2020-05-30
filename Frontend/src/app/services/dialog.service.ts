@@ -1,9 +1,12 @@
 import {Injectable, Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {ConfirmSignUpComponent} from "../pages/confirm-sign-up/confirm-sign-up.component";
-import {ProfileComponent} from "../pages/profile/profile.component";
-import {ViewUserDashboardComponent} from "../pages/view-user-dashboard/view-user-dashboard.component";
-import {EditTaskComponent} from "../pages/edit-task/edit-task.component";
+import {ConfirmSignUpComponent} from "../dialogs/confirm-sign-up/confirm-sign-up.component";
+import {ProfileComponent} from "../dialogs/profile/profile.component";
+import {ViewUserDashboardComponent} from "../dialogs/view-user-dashboard/view-user-dashboard.component";
+import {EditTaskComponent} from "../dialogs/edit-task/edit-task.component";
+import {EditListComponent} from "../dialogs/edit-list/edit-list.component";
+import {NewListComponent} from "../pages/new-list/new-list.component";
+import {NewTaskComponent} from "../pages/new-task/new-task.component";
 
 @Injectable({
     providedIn: 'root'
@@ -54,6 +57,33 @@ export class DialogService {
             data:{
                 task: task
             }
+        });
+    }
+
+    editListDialog(list: any)
+    {
+        return this.dialog.open(EditListComponent,{
+            width: "700px",
+            disableClose: true,
+            data:{
+                list: list
+            }
+        });
+    }
+
+    newListDialog()
+    {
+        return this.dialog.open(NewListComponent,{
+            width: "700px",
+            disableClose: true,
+        });
+    }
+
+    newTaskDialog()
+    {
+        return this.dialog.open(NewTaskComponent,{
+            width: "700px",
+            disableClose: true,
         });
     }
 }

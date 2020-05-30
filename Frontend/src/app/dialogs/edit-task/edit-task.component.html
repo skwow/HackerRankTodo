@@ -11,12 +11,22 @@
         <input #dueDateInput class="input styledText" type="date" [ngModel]="currentDate" min="{{minDate}}" onkeydown="return false" (change)="onDueDateChange(dueDateInput.value)">
 
         <br><br>
+<!--        <div *ngIf="this.data.task.status == 'New'">-->
+
         <p class="styledText">Select status</p>
         <div class="select styledText">
             <select class="styledText" #typeInput (change)="onTypeChange(typeInput.value)">
-                <option class="styledText">New</option>
-                <option class="styledText">Progress</option>
-                <option class="styledText">Completed</option>
+                <option *ngIf="this.data.task.status == 'New'" class="styledText">New</option>
+                <option *ngIf="this.data.task.status == 'New'" class="styledText">Progress</option>
+                <option *ngIf="this.data.task.status == 'New'" class="styledText">Completed</option>
+
+                <option *ngIf="this.data.task.status == 'Progress'" class="styledText">Progress</option>
+                <option *ngIf="this.data.task.status == 'Progress'" class="styledText">New</option>
+                <option *ngIf="this.data.task.status == 'Progress'" class="styledText">Completed</option>
+
+                <option *ngIf="this.data.task.status == 'Completed'" class="styledText">Completed</option>
+                <option *ngIf="this.data.task.status == 'Completed'" class="styledText">Progress</option>
+                <option *ngIf="this.data.task.status == 'Completed'" class="styledText">New</option>
             </select>
         </div>
 

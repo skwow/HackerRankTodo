@@ -24,6 +24,23 @@ export class TodoViewComponent implements OnInit {
     constructor(private api: TaskService,private auth:AuthService, private route: ActivatedRoute, private router:Router,private dialog:DialogService, private notificationService: NotificationService) {
     }
 
+    private getSortedTask()
+    {
+        this.api.getTasks(this.activeListId, this.taskStatus).subscribe((tasks:Task[])=>{
+            tasks.sort( (x,y)=>{
+                let a = new Date(x.due);
+                let b = new Date(y.due);
+                return a>b ? 1 : a<b ? -1 : 0;
+            });
+            for(let task of tasks)
+            {
+                let tmp = new Date(task.due);
+                task.dueS = tmp.getUTCDate()+"-"+(tmp.getUTCMonth()+1) + "-"+tmp.getUTCFullYear();
+            }
+            this.tasks = tasks;
+        });
+    }
+
     ngOnInit(): void {      // todo: bug: runs everytime a list type is clicked.
         this.route.params.subscribe((params: Params) =>
         {
@@ -38,20 +55,7 @@ export class TodoViewComponent implements OnInit {
             }
             if(params.listId)
             {
-                this.api.getTasks(params.listId, params.status).subscribe((tasks:Task[])=>{
-                    tasks.sort( (x,y)=>{
-                        let a = new Date(x.due);
-                        let b = new Date(y.due);
-                        return a>b ? 1 : a<b ? -1 : 0;
-                    });
-                    for(let task of tasks)
-                    {
-                        let tmp = new Date(task.due);
-                        task.due = tmp.getUTCDate()+"-"+(tmp.getUTCMonth()+1) + "-"+tmp.getUTCFullYear();
-                    }
-                    this.tasks = tasks;
-                    console.log(this.tasks);
-                });
+                this.getSortedTask();
             }
             else
             {
@@ -98,9 +102,56 @@ export class TodoViewComponent implements OnInit {
             if(data)
             {
                 this.api.updateTask(this.activeListId, data._id, data.title, data.due, data.status).subscribe((res)=>{
-                    console.log(res);
-                    this.router.navigate(['/lists', this.activeListId, data.status]);
+                    this.getSortedTask();
                     this.notificationService.success("Task updated!");
+                });
+            }
+        });
+    }
+
+    editList()
+    {
+        let list = this.lists.filter(obj => {
+            return obj._id === this.activeListId;
+        })
+        this.dialog.editListDialog(list[0]).afterClosed().subscribe((res)=>{
+            if (res)
+            {
+                this.api.updateList(this.activeListId,res.list.title).subscribe(()=>{
+                    this.notificationService.success("List updated!");
+                })
+            }
+        });
+    }
+
+    createList() {
+        this.dialog.newListDialog().afterClosed().subscribe((title)=>{
+            if (title)
+            {
+                console.log(title);
+                this.api.createList(title).subscribe((res: any) => {
+                    console.log(res);
+                    if(res.status === 200 && res.statusText === "Duplicate List")
+                    {
+                        this.notificationService.warn("This list already exist!");
+                    }
+                    else if (res.status === 200 && res.statusText === "OK")
+                    {
+                        this.router.navigate(['/lists', res.body._id, 'progress']);
+                        this.notificationService.success("New List Created!");
+                    }
+                });
+            }
+        });
+    }
+
+    createTask() {
+        this.dialog.newTaskDialog().afterClosed().subscribe((task)=>{
+            if (task)
+            {
+                this.api.createTask(task.title, this.activeListId,task.due, task.status).subscribe((newTask: Task)=>{
+                    this.getSortedTask();
+                    this.notificationService.success("New Task Created");
                 });
             }
         });

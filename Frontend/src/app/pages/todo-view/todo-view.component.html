@@ -77,7 +77,7 @@
 
                 <div class="task-buttons">
 
-                    <button class="button" [routerLink]="['/lists', activeListId, 'editTask', task._id, taskStatus]">
+                    <button class="button" (click)="editTask(task)">
                         <div class="icon">
                             <i class="fas fa-edit"></i>
                         </div>

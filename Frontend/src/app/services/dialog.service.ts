@@ -3,6 +3,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {ConfirmSignUpComponent} from "../pages/confirm-sign-up/confirm-sign-up.component";
 import {ProfileComponent} from "../pages/profile/profile.component";
 import {ViewUserDashboardComponent} from "../pages/view-user-dashboard/view-user-dashboard.component";
+import {EditTaskComponent} from "../pages/edit-task/edit-task.component";
 
 @Injectable({
     providedIn: 'root'
@@ -41,6 +42,17 @@ export class DialogService {
             disableClose: true,
             data:{
                 user: user
+            }
+        });
+    }
+
+    editTaskDialog(task: any)
+    {
+        return this.dialog.open(EditTaskComponent,{
+            width: "700px",
+            disableClose: true,
+            data:{
+                task: task
             }
         });
     }

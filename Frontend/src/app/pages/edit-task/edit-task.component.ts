@@ -1,8 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Params, Router} from "@angular/router";
-import {TaskService} from "../../services/task.service";
-import {Task} from "../../models/task.model";
-import {NotificationService} from "../../services/notification.service";
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
     selector: 'app-edit-task',
@@ -10,44 +7,35 @@ import {NotificationService} from "../../services/notification.service";
     styleUrls: ['./edit-task.component.scss']
 })
 export class EditTaskComponent implements OnInit {
-    listId: string;
-    taskId: string;
-    status: string;
-    dueDate: string;
     minDate: string;
-
-
-    constructor(private api: TaskService, private route: ActivatedRoute, private router: Router, private notificationService: NotificationService) {
+    currentDate: string;
+    constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<EditTaskComponent>) {
     }
 
     ngOnInit(): void {
-        const now = new Date();
-        const day = ("0" + now.getDate()).slice(-2);
-        const month = ("0" + (now.getMonth() + 1)).slice(-2);
+        console.log(this.data);
+        let now = new Date();
+        let day = ("0" + now.getDate()).slice(-2);
+        let month = ("0" + (now.getMonth() + 1)).slice(-2);
         this.minDate = now.getFullYear() + "-" + (month) + "-" + (day);
-        this.dueDate = this.minDate;
-        this.status = "New";
-        this.route.params.subscribe((params: Params) => {
-            this.listId = params["listId"];
-            this.taskId = params["taskId"];
-        })
+        now = new Date(this.data.task.due);
+        day = ("0" + now.getDate()).slice(-2);
+        month = ("0" + (now.getMonth() + 1)).slice(-2);
+        this.currentDate = now.getFullYear() + "-" + (month) + "-" + (day);
 
-    }
-
-    updateTask(title: string) {
-        this.api.updateTask(this.listId, this.taskId, title, this.dueDate, this.status).subscribe((res)=>{
-            console.log(res);
-            this.router.navigate(['/lists', this.listId, this.status]);
-            this.notificationService.success("Task updated!");
-        });
     }
 
     onTypeChange(status) {
-        this.status = status;
+        this.data.task.status = status;
     }
 
     onDueDateChange(dueDate) {
-        this.dueDate = dueDate;
+        this.data.task.due = dueDate;
+    }
+
+    onTitleChange(title)
+    {
+        this.data.task.title = title;
     }
 
 }

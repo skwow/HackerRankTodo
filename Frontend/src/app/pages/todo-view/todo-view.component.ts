@@ -91,4 +91,18 @@ export class TodoViewComponent implements OnInit {
             }
         });
     }
+
+    editTask(task: Task)
+    {
+        this.dialog.editTaskDialog(task).afterClosed().subscribe((data)=>{
+            if(data)
+            {
+                this.api.updateTask(this.activeListId, data._id, data.title, data.due, data.status).subscribe((res)=>{
+                    console.log(res);
+                    this.router.navigate(['/lists', this.activeListId, data.status]);
+                    this.notificationService.success("Task updated!");
+                });
+            }
+        });
+    }
 }

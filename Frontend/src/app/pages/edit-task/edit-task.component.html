@@ -4,11 +4,11 @@
             Update the task
         </h1>
 
-        <input #taskTitleInput class="input has-background-light is-medium styledText" type="text" placeholder="Enter task name...">
+        <input #taskTitleInput class="input has-background-light is-medium styledText" type="text" [ngModel]="this.data.task.title" (change)="onTitleChange(taskTitleInput.value)">
         <br><br>
 
         <p class="styledText">Pick Due Date</p>
-        <input #dueDateInput class="input styledText" type="date" [ngModel]="minDate" min="{{minDate}}" onkeydown="return false" (change)="onDueDateChange(dueDateInput.value)">
+        <input #dueDateInput class="input styledText" type="date" [ngModel]="currentDate" min="{{minDate}}" onkeydown="return false" (change)="onDueDateChange(dueDateInput.value)">
 
         <br><br>
         <p class="styledText">Select status</p>
@@ -22,8 +22,8 @@
 
         <br><br>
         <div class="buttons is-right">
-            <button class="button is-medium" [routerLink]="['/lists', listId, status]">Cancel</button>
-            <button class="button is-primary has-text-white is-medium" (click)="updateTask(taskTitleInput.value)">
+            <button class="button is-medium" [mat-dialog-close]="false">Cancel</button>
+            <button class="button is-primary has-text-white is-medium" [mat-dialog-close]="this.data.task">
                 Update
             </button>
         </div>

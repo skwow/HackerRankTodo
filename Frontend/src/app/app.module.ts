@@ -54,7 +54,7 @@ import { ViewUserDashboardComponent } from './pages/view-user-dashboard/view-use
         }
     ],
     bootstrap: [AppComponent],
-    entryComponents:[ConfirmSignUpComponent,ProfileComponent,ViewUserDashboardComponent]
+    entryComponents:[ConfirmSignUpComponent,ProfileComponent,ViewUserDashboardComponent,EditTaskComponent]
 })
 export class AppModule {
 }

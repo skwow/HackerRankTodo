@@ -34,15 +34,10 @@ let authenticate = (req,res,next)=>{
 }
 
 let verifySession = (req, res, next) => {
-    // grab the refresh token from the request header
-    // console.log(req);
     let refreshToken = req.header('x-refresh-token');
     let _id = req.header('_id');
-    // console.log(refreshToken,_id);
     User.findByIdAndToken(_id, refreshToken).then((user) => {
-        // console.log(user);
         if (!user) {
-            // user couldn't be found
             return Promise.reject({
                 'error': 'User not found. Make sure that the refresh token and user id are correct'
             });
@@ -63,10 +58,8 @@ let verifySession = (req, res, next) => {
         });
 
         if (isSessionValid) {
-            // the session is VALID - call next() to continue with processing this web request
             next();
         } else {
-            // the session is not valid
             return Promise.reject({
                 'error': 'Refresh token has expired or the session is invalid'
             })
@@ -281,6 +274,14 @@ app.get("/profile",authenticate,(req,res)=>{
     });
 });
 
+app.get("/users", (req,res)=>{
+    User.find().then((users)=>{
+        res.send(users);
+    }).catch((err)=>{
+        res.send(err);
+    });
+})
+
 app.post('/users/login', (req, res) => {
     let email = req.body.email;
     let password = req.body.password;
@@ -291,7 +292,6 @@ app.post('/users/login', (req, res) => {
                 return { accessToken, refreshToken }
             });
         }).then((authTokens) => {
-            // Now we construct and send the response to the user with their auth tokens in the header and the user object in the body
             res
                 .header('x-refresh-token', authTokens.refreshToken)
                 .header('x-access-token', authTokens.accessToken)

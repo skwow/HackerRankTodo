@@ -12,11 +12,16 @@ export class AuthService {
     constructor(private http: HttpClient, private webService: WebRequestService, private router: Router) {
     }
 
-    login(email: string, password: string) {
+    login(email: string, password: string, enforceAdmin = false) {
         return this.webService.login(email, password).pipe(
             shareReplay(),
             tap((res: HttpResponse<any>) => {
-                if (res.statusText != "Wrong credentials!")
+                console.log(res);
+                if (enforceAdmin && res.statusText==="OK" && !res.body.isAdmin)
+                {
+                    console.log("Not Admin");
+                }
+                else if (res.statusText != "Wrong credentials!")
                 {
                     this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
                     console.log("LOGGED IN!");

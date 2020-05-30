@@ -35,7 +35,8 @@ export class EditTaskComponent implements OnInit {
     }
 
     updateTask(title: string) {
-        this.api.updateTask(this.listId, this.taskId, title, this.dueDate, this.status).subscribe((newTask: Task)=>{
+        this.api.updateTask(this.listId, this.taskId, title, this.dueDate, this.status).subscribe((res)=>{
+            console.log(res);
             this.router.navigate(['/lists', this.listId, this.status]);
             this.notificationService.success("Task updated!");
         });

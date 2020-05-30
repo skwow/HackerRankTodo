@@ -35,6 +35,11 @@ export class TaskService {
         return this.apiService.get('lists');
     }
 
+    getAllUsers()
+    {
+        return this.apiService.get('users');
+    }
+
     getTasks(listId: string, _status: string)
     {
         return this.apiService.get(`lists/${listId}/tasks/${_status}`);

@@ -1,0 +1,24 @@
+<div class="centered-content">
+    <div class="white-box-dashboard">
+        <div class="DashboardChartBar">
+            <div id="chartContainer" class="insight-box"></div>
+        </div>
+        <div class="dashboardUsersList has-background-white">
+
+            <div class="dashboardCard is-horizontal" *ngFor="let user of this.users" (click)="viewUserDetails(user)">
+                <div class="media">
+                    <div class="media-left">
+                        <figure class="image is-64x64">
+                            <img [src]="user.imgFile" alt="Placeholder image">
+                        </figure>
+                    </div>
+                    <div class="media-right">
+                        <p class="DashboardTitle is-4">{{user.fullName}}({{user.email}})</p>
+                        <p class="DashboardTitle subtitle is-6">{{user._id}}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

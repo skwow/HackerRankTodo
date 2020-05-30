@@ -49,6 +49,8 @@ export class NewTaskComponent implements OnInit {
     }
 
     onDueDateChange(dueDate) {
+        dueDate = new Date(dueDate);
+        dueDate.setDate(dueDate.getDate() + 1);
         this.dueDate = dueDate;
     }
 }

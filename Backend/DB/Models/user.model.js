@@ -48,6 +48,11 @@ const UserSchema = new mongoose.Schema({
         required: false,
         trim: true
     },
+    isAdmin:{
+        type: Boolean,
+        required: false,
+        default: false,
+    },
     sessions: [{
         token: {
             type: String,
@@ -58,6 +63,9 @@ const UserSchema = new mongoose.Schema({
             required: true
         }
     }]
+},
+{
+    timestamp:true
 });
 
 UserSchema.index({ email: 1 }, { unique: true });

@@ -39,7 +39,18 @@ export class TodoViewComponent implements OnInit {
             if(params.listId)
             {
                 this.api.getTasks(params.listId, params.status).subscribe((tasks:Task[])=>{
+                    tasks.sort( (x,y)=>{
+                        let a = new Date(x.due);
+                        let b = new Date(y.due);
+                        return a>b ? 1 : a<b ? -1 : 0;
+                    });
+                    for(let task of tasks)
+                    {
+                        let tmp = new Date(task.due);
+                        task.due = tmp.getUTCDate()+"-"+(tmp.getUTCMonth()+1) + "-"+tmp.getUTCFullYear();
+                    }
                     this.tasks = tasks;
+                    console.log(this.tasks);
                 });
             }
             else

@@ -17,6 +17,9 @@ import { ConfirmSignUpComponent } from './pages/confirm-sign-up/confirm-sign-up.
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
+import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
+import { ViewUserDashboardComponent } from './pages/view-user-dashboard/view-user-dashboard.component';
 
 @NgModule({
     declarations: [
@@ -29,7 +32,10 @@ import { ProfileComponent } from './pages/profile/profile.component';
         EditListComponent,
         EditTaskComponent,
         ConfirmSignUpComponent,
-        ProfileComponent
+        ProfileComponent,
+        AdminLoginComponent,
+        AdminDashboardComponent,
+        ViewUserDashboardComponent
     ],
     imports: [
         BrowserModule,
@@ -48,7 +54,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
         }
     ],
     bootstrap: [AppComponent],
-    entryComponents:[ConfirmSignUpComponent,ProfileComponent]
+    entryComponents:[ConfirmSignUpComponent,ProfileComponent,ViewUserDashboardComponent]
 })
 export class AppModule {
 }

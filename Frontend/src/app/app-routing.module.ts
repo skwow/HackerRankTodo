@@ -7,10 +7,14 @@ import {LoginPageComponent} from "./pages/login-page/login-page.component";
 import {SignUpPageComponent} from "./pages/sign-up-page/sign-up-page.component";
 import {EditListComponent} from "./pages/edit-list/edit-list.component";
 import {EditTaskComponent} from "./pages/edit-task/edit-task.component";
+import {AdminLoginComponent} from "./pages/admin-login/admin-login.component";
+import {AdminDashboardComponent} from "./pages/admin-dashboard/admin-dashboard.component";
 
 
 const routes: Routes = [
     {path: '', redirectTo: '/lists', pathMatch: 'full'},
+    {path: "adminLogin", component: AdminLoginComponent},
+    {path: "adminDashboard", component: AdminDashboardComponent},
     {path: "lists", component: TodoViewComponent},
     {path: "newList", component:NewListComponent},
     {path: "editList/:listId/:activeTaskStatus", component:EditListComponent},

@@ -25,7 +25,6 @@ export class SignUpPageComponent implements OnInit {
             reader.readAsDataURL(blob);
             reader.onload = (_event) => {
                 this.image = reader.result as string ;
-                console.log(this.image);
             }
         })
     }
@@ -91,8 +90,9 @@ export class SignUpPageComponent implements OnInit {
         if (files.length === 0)
             return;
         let mimeType = files[0].type;
-        if (mimeType.match(/image\/*/) == null) {
-            console.log("Only images are supported.");  // todo: show notification
+        if (mimeType.match(/image\/*/) == null)
+        {
+            this.notificationService.warn("Not an Image");
             return;
         }
         let reader = new FileReader();
@@ -102,5 +102,3 @@ export class SignUpPageComponent implements OnInit {
         }
     }
 }
-
-// todo: make font consistent

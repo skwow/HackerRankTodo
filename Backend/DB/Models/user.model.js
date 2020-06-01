@@ -65,7 +65,7 @@ const UserSchema = new mongoose.Schema({
     }]
 },
 {
-    timestamp:true
+    timestamps:true
 });
 
 UserSchema.index({ email: 1 }, { unique: true });

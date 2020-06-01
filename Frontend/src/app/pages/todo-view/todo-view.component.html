@@ -17,10 +17,10 @@
                     </div>
                     <div class="dropdown-menu" id="dropdown-menu4" role="menu">
                         <div class="dropdown-content">
-                            <a (click)="editList()" class="dropdown-item">
+                            <a (click)="editList()" class="dropdown-item styledText">
                                 Edit
                             </a>
-                            <a (click)="onDeleteListClick()" class="dropdown-item has-text-danger">
+                            <a (click)="onDeleteListClick()" class="dropdown-item has-text-danger styledText">
                                 Delete
                             </a>
                         </div>
@@ -55,15 +55,15 @@
 
 
             <div class="task-type-menu" >
-                <a class="task-menu-item" [routerLink]="['/lists',activeListId,'New']" [ngClass]="{'is-active': taskStatus=='New', 'linkDisabled':activeListId === undefined }">
+                <a class="task-menu-item" [routerLink]="['/lists',activeListId,'New']" [ngClass]="{'is-active': taskStatus==='New', 'linkDisabled':activeListId === undefined }">
                     <p>New</p>
                 </a>
 
-                <a class="task-menu-item" [routerLink]="['/lists',activeListId,'Progress']" [ngClass]="{'is-active': taskStatus=='Progress', 'linkDisabled':activeListId === undefined }" >
+                <a class="task-menu-item" [routerLink]="['/lists',activeListId,'Progress']" [ngClass]="{'is-active': taskStatus==='Progress', 'linkDisabled':activeListId === undefined }" >
                     <p>Progress</p>
                 </a>
 
-                <a class="task-menu-item" [routerLink]="['/lists',activeListId,'Completed']" [ngClass]="{'is-active': taskStatus=='Completed', 'linkDisabled':activeListId === undefined }">
+                <a class="task-menu-item" [routerLink]="['/lists',activeListId,'Completed']" [ngClass]="{'is-active': taskStatus==='Completed', 'linkDisabled':activeListId === undefined }">
                     <p>Completed</p>
                 </a>
             </div>

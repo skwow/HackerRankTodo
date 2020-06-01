@@ -3,7 +3,6 @@ import {TaskService} from "../../services/task.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Task} from "../../models/task.model";
 import {List} from "../../models/list.model";
-import {HttpResponse} from "@angular/common/http";
 import {DialogService} from "../../services/dialog.service";
 import {NotificationService} from "../../services/notification.service"
 import {AuthService} from "../../services/auth.service";
@@ -41,7 +40,8 @@ export class TodoViewComponent implements OnInit {
         });
     }
 
-    ngOnInit(): void {      // todo: bug: runs everytime a list type is clicked.
+    ngOnInit(): void
+    {
         this.route.params.subscribe((params: Params) =>
         {
             this.activeListId = params.listId;
@@ -50,7 +50,6 @@ export class TodoViewComponent implements OnInit {
             {
                 this.api.getCurrentUser().subscribe((user:any)=>{
                     this.currentUser = user;
-                    console.log(this.currentUser);
                 })
             }
             if(params.listId)
@@ -71,7 +70,6 @@ export class TodoViewComponent implements OnInit {
     onDeleteListClick()
     {
         this.api.deleteList(this.activeListId).subscribe((res:any)=>{
-            console.log(res);
             this.router.navigate(['/lists']);
             this.notificationService.warn("List deleted Successfully!");
         });
@@ -128,15 +126,14 @@ export class TodoViewComponent implements OnInit {
         this.dialog.newListDialog().afterClosed().subscribe((title)=>{
             if (title)
             {
-                console.log(title);
                 this.api.createList(title).subscribe((res: any) => {
-                    console.log(res);
                     if(res.status === 200 && res.statusText === "Duplicate List")
                     {
                         this.notificationService.warn("This list already exist!");
                     }
                     else if (res.status === 200 && res.statusText === "OK")
                     {
+                        this.lists.push(res.body);
                         this.router.navigate(['/lists', res.body._id, 'progress']);
                         this.notificationService.success("New List Created!");
                     }

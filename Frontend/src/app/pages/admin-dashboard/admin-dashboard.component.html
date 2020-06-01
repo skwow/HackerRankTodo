@@ -1,4 +1,10 @@
-<div class="centered-content">
+<div class="centered-content" *ngIf="!this.currentUser.isAdmin">
+    <h1 class="styledTest">
+        You are not Admin!
+    </h1>
+</div>
+
+<div class="centered-content" *ngIf="this.currentUser.isAdmin">
     <div class="white-box-dashboard">
         <div class="DashboardChartBar">
             <div id="chartContainer" class="insight-box"></div>
@@ -14,7 +20,7 @@
                     </div>
                     <div class="media-right">
                         <p class="DashboardTitle is-4">{{user.fullName}}({{user.email}})</p>
-                        <p class="DashboardTitle subtitle is-6">{{user._id}}</p>
+                        <p class="DashboardTitle subtitle is-6">{{user._id}},{{user.created_at}}</p>
                     </div>
                 </div>
             </div>

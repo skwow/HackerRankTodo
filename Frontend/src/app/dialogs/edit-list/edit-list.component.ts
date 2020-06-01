@@ -15,11 +15,11 @@ export class EditListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log(this.data);
+        // console.log(this.data);
     }
 
     onTitleChange(value: string) {
         this.data.list.title = value;
-        console.log(this.data.list.title);
+        // console.log(this.data.list.title);
     }
 }

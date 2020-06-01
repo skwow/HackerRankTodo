@@ -16,19 +16,18 @@ export class AuthService {
         return this.webService.login(email, password).pipe(
             shareReplay(),
             tap((res: HttpResponse<any>) => {
-                console.log(res);
                 if (enforceAdmin && res.statusText==="OK" && !res.body.isAdmin)
                 {
-                    console.log("Not Admin");
+                    // console.log("Not Admin");
                 }
                 else if (res.statusText != "Wrong credentials!")
                 {
                     this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
-                    console.log("LOGGED IN!");
+                    // console.log("LOGGED IN!");
                 }
                 else
                 {
-                    console.log("NOT LOGGED IN!");
+                    // console.log("NOT LOGGED IN!");
                 }
             })
         )
@@ -40,14 +39,14 @@ export class AuthService {
             shareReplay(),
             tap((res: HttpResponse<any>) =>
             {
-                if (res.statusText != "Duplicate Email")
+                if (res.statusText != "Duplicate Email")  // todo: bad code
                 {
                     this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
-                    console.log("Successfully signed up and logged in!");
+                    // console.log("Successfully signed up and logged in!");
                 }
                 else
                 {
-                    console.log("Duplicate email");
+                    // console.log("Duplicate email");
                 }
             })
         )

@@ -13,7 +13,7 @@ export class EditTaskComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log(this.data);
+        // console.log(this.data);
         let now = new Date();
         let day = ("0" + now.getDate()).slice(-2);
         let month = ("0" + (now.getMonth() + 1)).slice(-2);

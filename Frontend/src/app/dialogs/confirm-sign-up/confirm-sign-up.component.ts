@@ -13,7 +13,7 @@ export class ConfirmSignUpComponent implements OnInit {
 
     ngOnInit(): void
     {
-        console.log(this.data.user);
+        // console.log(this.data.user);
     }
 
 }

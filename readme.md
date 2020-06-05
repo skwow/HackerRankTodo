@@ -3,6 +3,6 @@
 
 <object data="./ToDo.pdf" type="application/pdf" width="700px" height="700px">
     <embed src="./ToDo.pdf">
-        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="./ToDo.pdf">Download PDF</a>.</p>
+        <p>Documentation and Instructions: <a href="./ToDo.pdf">View</a>.</p>
     </embed>
 </object>

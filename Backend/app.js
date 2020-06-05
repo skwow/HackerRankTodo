@@ -324,7 +324,11 @@ let deleteAllTasksfromList = (_listId)=>{
     });
 }
 
-
+const staticFilePath = './public'
+app.use(express.static(staticFilePath));
+app.get('*', function(req, res) {
+    res.sendFile( __dirname + "/public/" + "index.html" );
+});
 
 app.listen(3000, () => {
     console.log("App is listening on 3000");

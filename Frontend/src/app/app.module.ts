@@ -20,6 +20,7 @@ import { ProfileComponent } from './dialogs/profile/profile.component';
 import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 import { ViewUserDashboardComponent } from './dialogs/view-user-dashboard/view-user-dashboard.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
     declarations: [
@@ -47,6 +48,10 @@ import { ViewUserDashboardComponent } from './dialogs/view-user-dashboard/view-u
         MatSnackBarModule
     ],
     providers: [
+        {
+            provide: LocationStrategy,
+            useClass: HashLocationStrategy
+        },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: WebRequestInterceptor,

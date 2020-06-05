@@ -9,7 +9,8 @@ export class WebRequestService {
     readonly URL;
 
     constructor(private http: HttpClient) {
-        this.URL = 'http://localhost:3000';
+        // this.URL = 'http://localhost:3000';
+        this.URL = "";
     }
 
     get(url: string) {

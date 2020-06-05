@@ -100,3 +100,13 @@ snack-bar-container.warnNotification
     background-color: $light;
     color:  orangered;
 }
+
+.mat-simple-snackbar
+{
+    display: flex;
+    font-size: 24px;
+    font-family: "Comic Sans MS", serif;
+    height: 47.952px;
+    align-items: center !important;
+    justify-content: center !important;
+}
